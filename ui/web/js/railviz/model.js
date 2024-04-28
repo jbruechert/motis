@@ -178,7 +178,7 @@ RailViz.Model = (function () {
 
   function preprocessStation(s) {
     s.rawPos = s.pos;
-    s.mercatorPos = mapboxgl.MercatorCoordinate.fromLngLat([
+    s.mercatorPos = maplibregl.MercatorCoordinate.fromLngLat([
       s.pos.lng,
       s.pos.lat,
     ]);
@@ -193,7 +193,7 @@ RailViz.Model = (function () {
     let p = {
       coordinates: coordinates,
       mercatorCoordinates: coordinates.map((ll) =>
-        mapboxgl.MercatorCoordinate.fromLngLat([ll[1], ll[0]])
+        maplibregl.MercatorCoordinate.fromLngLat([ll[1], ll[0]])
       ),
     };
 
@@ -222,7 +222,7 @@ RailViz.Model = (function () {
     let converted = [];
     let j = 0;
     for (let i = 0; i < coords.length - 1; i += 2) {
-      const wc = mapboxgl.MercatorCoordinate.fromLngLat({
+      const wc = maplibregl.MercatorCoordinate.fromLngLat({
         lng: coords[i + 1],
         lat: coords[i],
       });

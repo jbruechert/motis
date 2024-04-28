@@ -1,5 +1,5 @@
-// moveToMapPosition and syncMaps take from mapbox-gl-sync-move
-// see : https://github.com/mapbox/mapbox-gl-sync-move
+// moveToMapPosition and syncMaps take from maplibre-gl-sync-move
+// see : https://github.com/mapbox/maplibre-gl-sync-move
 //
 // Copyright (c) 2016, Mapbox
 //
@@ -105,7 +105,7 @@ class RailVizCustomLayer {
     this.zoomRounded = Math.floor(this.map.getZoom() * 4) / 4;
     RailViz.Render.setup(map, gl);
 
-    // does not seem to work properly: https://github.com/mapbox/mapbox-gl-js/issues/9516
+    // does not seem to work properly: https://github.com/mapbox/maplibre-gl-js/issues/9516
     map.on("webglcontextlost", () => {
       RailViz.Render.stop();
     });
@@ -209,8 +209,8 @@ function initPorts(app, apiEndpoint, tilesEndpoint, initialPermalink, style) {
     var bearing = (settings && settings.bearing) || initialPermalink.bearing;
     var pitch = (settings && settings.pitch) || initialPermalink.pitch;
 
-    // use two maps until resolved: https://github.com/mapbox/mapbox-gl-js/issues/8159
-    var map_bg = new mapboxgl.Map({
+    // use two maps until resolved: https://github.com/mapbox/maplibre-gl-js/issues/8159
+    var map_bg = new maplibregl.Map({
       container: `${id}-background`,
       style: style == 'color' ? colorStyle(tilesEndpoint, apiEndpoint) : backgroundMapStyle(tilesEndpoint),
       zoom: zoom,
@@ -238,7 +238,7 @@ function initPorts(app, apiEndpoint, tilesEndpoint, initialPermalink, style) {
       })
     );
 
-    var map_fg = new mapboxgl.Map({
+    var map_fg = new maplibregl.Map({
       container: `${id}-foreground`,
       zoom: zoom,
       minZoom: 2,
@@ -296,7 +296,7 @@ function initPorts(app, apiEndpoint, tilesEndpoint, initialPermalink, style) {
         : { maxZoom: 12 };
 
       const options = map.cameraForBounds(
-        new mapboxgl.LngLatBounds([opt.lng, opt.lat], [opt.lng, opt.lat]),
+        new maplibregl.LngLatBounds([opt.lng, opt.lat], [opt.lng, opt.lat]),
         camOptions
       );
       if (opt.zoom) {
@@ -315,7 +315,7 @@ function initPorts(app, apiEndpoint, tilesEndpoint, initialPermalink, style) {
     app.ports.mapFitBounds.subscribe(function (opt) {
       const bounds = opt.coords.reduce(
         (b, c) => b.extend([c[1], c[0]]),
-        new mapboxgl.LngLatBounds()
+        new maplibregl.LngLatBounds()
       );
       if (!bounds.isEmpty()) {
         window.elmMaps[opt.mapId].fitBounds(bounds, { padding, pitch: 0 });
@@ -326,7 +326,7 @@ function initPorts(app, apiEndpoint, tilesEndpoint, initialPermalink, style) {
       const bounds = opt.connections.reduce(
         (b, conn) =>
           conn.stations.reduce((sb, s) => sb.extend([s.pos.lng, s.pos.lat]), b),
-        new mapboxgl.LngLatBounds()
+        new maplibregl.LngLatBounds()
       );
       if (!bounds.isEmpty()) {
         window.elmMaps[opt.mapId].fitBounds(bounds, { padding, pitch: 0 });

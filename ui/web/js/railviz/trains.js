@@ -489,7 +489,7 @@ RailViz.Trains = (function () {
     mat4.multiply(p2, perspective, p2);
     gl.uniformMatrix4fv(u_perspective, false, p2);
 
-    // size of a pixel in mapboxgl mercator units
+    // size of a pixel in maplibregl mercator units
     const px_size = 1 / (512 * Math.pow(2, zoom)); // magic number YAY
     gl.uniform1f(
       u_radius,

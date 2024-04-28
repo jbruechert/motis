@@ -68,7 +68,7 @@ RailViz.Markers = (function () {
       el.style.height = "48px";
       el.style.backgroundImage = img;
 
-      m = new mapboxgl.Marker(el, {
+      m = new maplibregl.Marker(el, {
         anchor: "bottom",
         offset: [0, 7],
       }).setLngLat([pos.lng, pos.lat]);
